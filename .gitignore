@@ -1,8 +1,16 @@
-.DS_Store
-.gradle
+*~
 target
-build
+.idea
 *.iml
-*.iws
-*.ipr
-.idea/
+settings.xml
+.classpath.txt
+.fullclasspath.txt
+
+# eclipse
+.project
+.buildpath
+.classpath
+.settings
+.checkstyle
+
+.mvn/wrapper/maven-wrapper.jar
