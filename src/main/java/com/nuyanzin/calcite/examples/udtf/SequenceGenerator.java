@@ -15,34 +15,34 @@ import org.apache.calcite.sql.type.SqlTypeName;
  * SequenceGenerator example.
  */
 public class SequenceGenerator extends AbstractTable implements ScannableTable {
-  private final long start;
-  private final long count;
-  private final long increment;
+  private final int start;
+  private final int count;
+  private final int increment;
 
-  private SequenceGenerator(long start, long count, long increment) {
+  private SequenceGenerator(int start, int count, int increment) {
     this.start = start;
     this.count = count;
     this.increment = increment;
   }
 
-  private SequenceGenerator(long start, long count) {
+  private SequenceGenerator(int start, int count) {
     this(start, count, 1);
   }
 
   @SuppressWarnings("unused") // called via reflection
   public static ScannableTable generate(
-      long start, long count, long increment) {
+      int start, int count, int increment) {
     return new SequenceGenerator(start, count, increment);
   }
 
   @SuppressWarnings("unused") // called via reflection
-  public static ScannableTable generate(long start, long count) {
+  public static ScannableTable generate(int start, int count) {
     return new SequenceGenerator(start, count);
   }
 
   public RelDataType getRowType(RelDataTypeFactory typeFactory) {
     return typeFactory.builder()
-        .add("S", SqlTypeName.BIGINT, RelDataType.PRECISION_NOT_SPECIFIED)
+        .add("S", SqlTypeName.INTEGER)
         .build();
   }
 
@@ -50,26 +50,23 @@ public class SequenceGenerator extends AbstractTable implements ScannableTable {
     return new AbstractEnumerable<Object[]>() {
         public Enumerator<Object[]> enumerator() {
           return Linq4j.transform(
-              new Enumerator<Long>() {
-                long current = start;
-                long c = 0;
+              new Enumerator<Integer>() {
+                int c = 0;
 
-                public Long current() {
-                  return current;
+                public Integer current() {
+                  return start + (c - 1) * increment;
                 }
 
                 public boolean moveNext() {
                   if (c == count) {
                     return false;
                   }
-                  current += increment;
                   c++;
                   return true;
                 }
 
                 public void reset() {
                   c = 0;
-                  current = start;
                 }
 
                 public void close() {
