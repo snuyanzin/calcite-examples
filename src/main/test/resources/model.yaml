@@ -2,12 +2,18 @@
 version: 1.0
 defaultSchema: UDTF
 schemas:
+  - type: jdbc
+    name: personal
+    jdbcUser: ""
+    jdbcPassword: ""
+    jdbcUrl: jdbc:phoenix:127.0.0.1
+    jdbcSchema: null
   - name: UDTF
     type: map
     functions:
-      - name: SEQGEN
-        className: com.nuyanzin.calcite.examples.udtf.SequenceGenerator
-        methodName: generate
+      - name: STR_GEN
+        className: com.nuyanzin.calcite.examples.udtf.IntStringGenerator
+        methodName: generateStrings
       - name: REPEAT
         className: com.nuyanzin.calcite.examples.udtf.VarcharRepeater
         methodName: repeat
