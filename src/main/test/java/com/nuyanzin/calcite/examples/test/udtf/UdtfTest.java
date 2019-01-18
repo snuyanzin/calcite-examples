@@ -1,5 +1,6 @@
 package com.nuyanzin.calcite.examples.test.udtf;
 
+import com.nuyanzin.calcite.examples.udtf.IntStringGenerator;
 import com.nuyanzin.calcite.examples.udtf.SequenceGenerator;
 import com.nuyanzin.calcite.examples.udtf.VarcharRepeater;
 import org.apache.calcite.jdbc.CalciteConnection;
@@ -80,6 +81,29 @@ public class UdtfTest {
     checkTableFunction(expected, sql, registerSchemaAndUdtf);
   }
 
+  @Test public void testJsonValue() {
+    final String expected = ""
+        + "0\t\n"
+        + "1\ta\n"
+        + "2\tab\n"
+        + "3\tabc\n"
+        + "4\tabcd\n"
+        + "5\tabcde\n";
+    final String schemaName = "s";
+    final String udtfName = "Generate";
+    final String sql = "select * "
+        + "from table(\"" + schemaName + "\".\"" + udtfName + "\"(6)) as t(s, q)";
+    final Method seqGen = Types.lookupMethod(
+        IntStringGenerator.class, "generateStrings", int.class);
+
+    final Consumer<SchemaPlus> registerSchemaAndUdtf = rootSchema -> {
+      SchemaPlus schema = rootSchema.add(schemaName, new AbstractSchema());
+      schema.add(udtfName, TableFunctionImpl.create(seqGen));
+    };
+
+    checkTableFunction(expected, sql, registerSchemaAndUdtf);
+  }
+
   private void checkTableFunction(String expected, String sql, Consumer<SchemaPlus> schemaAndUdtfRegister) {
     try {
       Connection connection = DriverManager.getConnection("jdbc:calcite:");
@@ -89,12 +113,20 @@ public class UdtfTest {
       schemaAndUdtfRegister.accept(rootSchema);
       ResultSet resultSet = connection.createStatement().executeQuery(sql);
       final StringBuilder b = new StringBuilder();
+      final int columnCount = resultSet.getMetaData().getColumnCount();
       while (resultSet.next()) {
-        b.append(resultSet.getString(1)).append("\n");
+        for (int i = 1; i <= columnCount; i++) {
+          b.append(resultSet.getString(i));
+          if (i < columnCount) {
+            b.append("\t");
+          }
+        }
+        b.append("\n");
       }
       assertThat(b.toString(), is(expected));
     } catch (Throwable t) {
       // fail
+      t.printStackTrace();
       throw new RuntimeException(t);
     }
   }
