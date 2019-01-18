@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "defaultSchema": "UDTF",
+  "schemas": [
+    {
+      "name": "UDTF",
+      "type": "map",
+      "functions": [ {
+        "name": "SEQGEN",
+        "className": "com.nuyanzin.calcite.examples.udtf.SequenceGenerator",
+        "methodName": "generate"
+      }, {
+        "name": "REPEAT",
+        "className": "com.nuyanzin.calcite.examples.udtf.VarcharRepeater",
+        "methodName": "repeat"
+      } ]
+    }
+  ]
+}
