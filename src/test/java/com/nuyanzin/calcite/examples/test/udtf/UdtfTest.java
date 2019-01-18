@@ -1,20 +1,21 @@
 package com.nuyanzin.calcite.examples.test.udtf;
 
+import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.function.Consumer;
+
 import com.nuyanzin.calcite.examples.udtf.IntStringGenerator;
 import com.nuyanzin.calcite.examples.udtf.SequenceGenerator;
 import com.nuyanzin.calcite.examples.udtf.VarcharRepeater;
+
 import org.apache.calcite.jdbc.CalciteConnection;
 import org.apache.calcite.linq4j.tree.Types;
 import org.apache.calcite.schema.SchemaPlus;
 import org.apache.calcite.schema.impl.AbstractSchema;
 import org.apache.calcite.schema.impl.TableFunctionImpl;
 import org.junit.Test;
-
-import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.util.function.Consumer;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -104,7 +105,8 @@ public class UdtfTest {
     checkTableFunction(expected, sql, registerSchemaAndUdtf);
   }
 
-  private void checkTableFunction(String expected, String sql, Consumer<SchemaPlus> schemaAndUdtfRegister) {
+  private void checkTableFunction(
+      String expected, String sql, Consumer<SchemaPlus> schemaAndUdtfRegister) {
     try {
       Connection connection = DriverManager.getConnection("jdbc:calcite:");
       CalciteConnection calciteConnection =

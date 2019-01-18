@@ -1,14 +1,13 @@
 {
   "version": "1.0",
   "defaultSchema": "UDTF",
-  "schemas": [
-    {
-      "type": "jdbc",
-      "name": "personal",
-      "jdbcUser": "",
-      "jdbcPassword": "",
-      "jdbcUrl": "jdbc:phoenix:127.0.0.1",
-      "jdbcSchema": null
+  "schemas": [ {
+      "name": "SALES",
+      "type": "custom",
+      "factory": "org.apache.calcite.adapter.csv.CsvSchemaFactory",
+      "operand": {
+        "directory": "sales"
+      }
     }, {
       "name": "UDTF",
       "type": "map",
