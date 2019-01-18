@@ -1,4 +1,4 @@
-OrderDate:string,Region:string,Rep:string,Item:string,Units:int,"Unit Cost":double,Total:double
+OrderDate:string,Region:string,Rep:string,Item:string,Units:int,Unit Cost:double,Total:double
 "1/6/18","East","Jones","Pencil",95,1.99,189.05
 "1/23/18","Central","Kivell","Binder",50,19.99,999.50
 "2/9/18","Central","Jardine","Pencil",36,4.99,179.64
