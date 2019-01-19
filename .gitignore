@@ -14,3 +14,4 @@ settings.xml
 .checkstyle
 
 .mvn/wrapper/maven-wrapper.jar
+.dependency-reduced-pom.xml

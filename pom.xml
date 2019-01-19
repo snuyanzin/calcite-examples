@@ -18,7 +18,7 @@
     <top.dir>${project.basedir}</top.dir>
 
     <!-- The following list is sorted. -->
-    <calcite.version>1.16.0</calcite.version>
+    <calcite.version>1.18.0</calcite.version>
     <checkstyle.version>7.8.2</checkstyle.version>
     <forbiddenapis.version>2.6</forbiddenapis.version>
     <jmockit.version>1.44</jmockit.version>
@@ -33,9 +33,11 @@
     <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
     <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
     <maven-javadoc-plugin.additionalOptions>-html5</maven-javadoc-plugin.additionalOptions>
+    <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
     <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
     <sqlline.version>1.6.0</sqlline.version>
+    <shaded.package>com.nuyanzin.calcite.examples.shaded</shaded.package>
   </properties>
 
   <licenses>
@@ -247,6 +249,106 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>${maven-shade-plugin.version}</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+
+              <transformers>
+                <transformer
+                        implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>README.md</resource>
+                  <file>${project.basedir}/../README.md</file>
+                </transformer>
+                <transformer
+                        implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>LICENSE.txt</resource>
+                  <file>${project.basedir}/../LICENSE</file>
+                </transformer>
+                <transformer
+                        implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>NOTICE</resource>
+                  <file>${project.basedir}/../NOTICE</file>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+              </transformers>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/license/*</exclude>
+                    <exclude>LICENSE.*</exclude>
+                    <exclude>NOTICE.*</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+
+              <relocations>
+
+                <!-- COM relocation -->
+
+                <relocation>
+                  <pattern>com.fasterxml</pattern>
+                  <shadedPattern>${shaded.package}.com.fasterxml</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.google.collect</pattern>
+                  <shadedPattern>${shaded.package}.com.google.collect</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.google.protobuf</pattern>
+                  <shadedPattern>${shaded.package}.com.google.protobuf</shadedPattern>
+                </relocation>
+                <!-- ORG relocation -->
+                <relocation>
+                  <pattern>org.apache.calcite.avatica</pattern>
+                  <shadedPattern>${shaded.package}.org.apache.calcite.avatica</shadedPattern>
+                  <!-- The protobuf messages can't be relocated due to a limitation
+                       in the Avatica protocol. -->
+                  <excludes>
+                    <exclude>org.apache.calcite.avatica.proto.*</exclude>
+                  </excludes>
+                </relocation>
+                <relocation>
+                  <pattern>org.apache.commons</pattern>
+                  <shadedPattern>${shaded.package}.org.apache.commons</shadedPattern>
+                  <excludes>
+                    <exclude>org.apache.commons.logging.**</exclude>
+                  </excludes>
+                </relocation>
+                <relocation>
+                  <pattern>org.apache.http</pattern>
+                  <shadedPattern>${shaded.package}.org.apache.http</shadedPattern>
+                </relocation>
+
+                <relocation>
+                  <pattern>org.fusesource</pattern>
+                  <shadedPattern>${shaded.package}.org.fusesource</shadedPattern>
+                </relocation>
+
+                <!-- MISC relocations -->
+
+                <relocation>
+                  <pattern>org.jline</pattern>
+                  <shadedPattern>${shaded.package}.org.jline</shadedPattern>
+                </relocation>
+
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
 
     <pluginManagement>
