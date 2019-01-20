@@ -15,10 +15,9 @@ import org.apache.calcite.linq4j.tree.Types;
 import org.apache.calcite.schema.SchemaPlus;
 import org.apache.calcite.schema.impl.AbstractSchema;
 import org.apache.calcite.schema.impl.TableFunctionImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for udtfs.
@@ -125,7 +124,7 @@ public class UdtfTest {
         }
         b.append("\n");
       }
-      assertThat(b.toString(), is(expected));
+      assertEquals(expected, b.toString());
     } catch (Throwable t) {
       // fail
       t.printStackTrace();
