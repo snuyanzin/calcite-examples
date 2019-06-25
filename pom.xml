@@ -20,7 +20,7 @@
 
     <!-- The following list is sorted. -->
     <calcite.version>1.19.0</calcite.version>
-    <checkstyle.version>8.21</checkstyle.version>
+    <checkstyle.version>8.22</checkstyle.version>
     <forbiddenapis.version>2.6</forbiddenapis.version>
     <hamcrest.version>2.1</hamcrest.version>
     <jmockit.version>1.46</jmockit.version>
@@ -38,6 +38,7 @@
     <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
     <maven-source-plugin.version>3.1.0</maven-source-plugin.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    <postgresql.driver.version>42.2.5</postgresql.driver.version>
     <sqlline.version>1.8.0</sqlline.version>
   </properties>
 
@@ -400,6 +401,12 @@
       <artifactId>hamcrest</artifactId>
       <version>${hamcrest.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgresql.driver.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>sqlline</groupId>
