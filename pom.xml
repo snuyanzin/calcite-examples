@@ -19,12 +19,13 @@
     <top.dir>${project.basedir}</top.dir>
 
     <!-- The following list is sorted. -->
-    <calcite.version>1.19.0</calcite.version>
-    <checkstyle.version>8.22</checkstyle.version>
+    <calcite.version>1.20.0</calcite.version>
+    <checkstyle.version>8.23</checkstyle.version>
     <forbiddenapis.version>2.6</forbiddenapis.version>
     <hamcrest.version>2.1</hamcrest.version>
-    <jmockit.version>1.46</jmockit.version>
-    <junit.version>5.4.2</junit.version>
+    <jmockit.version>1.47</jmockit.version>
+    <junit.version>5.5.1</junit.version>
+    <mariadb.driver.version>2.4.2</mariadb.driver.version>
     <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
     <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -38,7 +39,8 @@
     <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
     <maven-source-plugin.version>3.1.0</maven-source-plugin.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    <postgresql.driver.version>42.2.5</postgresql.driver.version>
+    <mssql.jdbc.version>7.2.2.jre11</mssql.jdbc.version>
+    <postgresql.driver.version>42.2.6</postgresql.driver.version>
     <sqlline.version>1.8.0</sqlline.version>
   </properties>
 
@@ -406,6 +408,18 @@
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>${postgresql.driver.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>${mariadb.driver.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>mssql-jdbc</artifactId>
+      <version>${mssql.jdbc.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
