@@ -19,13 +19,13 @@
     <top.dir>${project.basedir}</top.dir>
 
     <!-- The following list is sorted. -->
-    <calcite.version>1.20.0</calcite.version>
+    <calcite.version>1.21.0</calcite.version>
     <checkstyle.version>8.25</checkstyle.version>
     <forbiddenapis.version>2.6</forbiddenapis.version>
     <hamcrest.version>2.1</hamcrest.version>
-    <jmockit.version>1.47</jmockit.version>
+    <jmockit.version>1.48</jmockit.version>
     <junit.version>5.5.2</junit.version>
-    <mariadb.driver.version>2.4.2</mariadb.driver.version>
+    <mariadb.driver.version>2.5.0</mariadb.driver.version>
     <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
     <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -39,7 +39,7 @@
     <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
     <maven-source-plugin.version>3.1.0</maven-source-plugin.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    <mssql.jdbc.version>7.2.2.jre11</mssql.jdbc.version>
+    <mssql.jdbc.version>7.4.1.jre12</mssql.jdbc.version>
     <postgresql.driver.version>42.2.8</postgresql.driver.version>
     <sqlline.version>1.9.0</sqlline.version>
   </properties>
