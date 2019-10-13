@@ -41,7 +41,7 @@
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <mssql.jdbc.version>7.4.1.jre12</mssql.jdbc.version>
     <postgresql.driver.version>42.2.8</postgresql.driver.version>
-    <sqlline.version>1.9.0</sqlline.version>
+    <sqlline.version>1.8.0</sqlline.version>
   </properties>
 
   <licenses>
