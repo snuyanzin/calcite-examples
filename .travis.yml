@@ -1,12 +1,15 @@
 # Configuration for Travis CI
-language: java
 matrix:
   fast_finish: true
   include:
   - env: IMAGE=maven:3-jdk-11 JDOC=Y
+    language: java
   - env: IMAGE=maven:3-jdk-10
+    language: java
   - env: IMAGE=maven:3-jdk-9
+    language: java
   - env: IMAGE=maven:3-jdk-8 JDOC=Y
+    language: java
   - env: IMAGE=maven:3-jdk-11 JDOC=Y
     os: windows
   - env: IMAGE=maven:3-jdk-10
