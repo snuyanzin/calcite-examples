@@ -11,13 +11,9 @@ matrix:
   - env: IMAGE=maven:3-jdk-8 JDOC=Y
     language: java
   - env: IMAGE=maven:3-jdk-11 JDOC=Y
-    os: windows
-  - env: IMAGE=maven:3-jdk-10
-    os: windows
-  - env: IMAGE=maven:3-jdk-9
-    os: windows
+    os: osx
   - env: IMAGE=maven:3-jdk-8 JDOC=Y
-    os: windows
+    os: osx
 branches:
   only:
     - master
