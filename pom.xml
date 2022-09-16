@@ -19,7 +19,7 @@
     <top.dir>${project.basedir}</top.dir>
 
     <!-- The following list is sorted. -->
-    <calcite.version>1.21.0</calcite.version>
+    <calcite.version>1.32.0</calcite.version>
     <checkstyle.version>8.36.2</checkstyle.version>
     <forbiddenapis.version>2.7</forbiddenapis.version>
     <hamcrest.version>2.2</hamcrest.version>
